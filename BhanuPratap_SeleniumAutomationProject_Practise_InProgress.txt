@@ -1,0 +1,12 @@
+Youtube Selenium Training and practise
+
+bhanu pratap selenium framework = https://www.youtube.com/user/MrBhanupratap29
+
+file:///Users/bsingh5/Desktop/demoSite.htm
+
+Eclipse Project: UIAutomation
+Bhanu Pratap:
+Page Object Model Framework With Page Factory Video
+Finished : Video-3(2017-Jun-17)
+Next to Start: Video-8
+***************************************************

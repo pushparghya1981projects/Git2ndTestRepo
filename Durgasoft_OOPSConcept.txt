@@ -1,0 +1,271 @@
+OOPs Concepts:
+
+1) Data Hiding
+2) Abstraction
+3) Encapsulation
+4) Tightly coupled class
+
+5) IS-A Relationship(Inheritance)
+6) HAS-A Relationship, Composition, Aggregation
+
+7) Method signature
+8) Overloading (Polymorphism)
+9) Overriding (Polymorphism)
+
+10) Static Control flow
+11) Instance Control flow
+12) Constructors (Singleton)
+13) Coupling
+14) Cohesion
+15) Type casting
+**********************************************************
+
+1) Data Hiding: outside person can't access our internal data directly or our internal data should not go out directly.
+this OOP feature is nothing but 'data hiding'.After validation or authentication, outside person can access our internal data.
+Ex: After providing proper username and password, we can able to our gmail inbox information.
+Ex: Even though, we are valid customer of the bank; we can able to access our account information, but we can't access others' account information.
+
+in order to achieve data hiding, we have to declare data member (variables) as private. 
+The main advantage of data hiding is "Security".
+Recommended data member (variable) modifier: private.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+2) Abstraction: overview. abstract idea. Very top level but not clear idea. 
+Highlighting set of services is shared; but internal business logic,process is hidden.
+Hiding internal implementation and just highlight the set of services(methods) we are offering, is a concept of abstraction.
+Ex: through ATM GUI screen, bank people are offering set of services to end users.
+
+Services: Check Balance, Withdraw, Deposit, Mini Statement
+Advantage: 
+1) we can achieve Security, because we are are highlighting our internal implementation.
+2) Without affecting outside person, we can able to perform any type of changes in our internal system, and hence enhancement will become easy.
+3) It improves maintainability of the application.
+4) It improves easiness to use the system.
+
+How to achieve Abstraction: By using interfaces and abstract classes we can implement Abstraction.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+3) Encapsulation: data hiding + abstraction
+The process of binding class data members and corresponding methods into a single unit(in a class). 
+Every Java class is encapsulation.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+4) Tightly Encapsulated class: if that class have all data members are declared as private.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+5) IS-A Relationship(Inheritance): is a relationship by "extends" keyword.
+advantage: code re-usability. 
+
+Ex:
+class P
+{
+	public void m1()
+	{
+		sout("Parent m1");
+	}
+}
+
+class C extends P
+{
+	public void m2()
+	{
+		sout("Child m2");
+	}
+}
+
+class Test
+{
+	public static void main(String [] args)
+	{
+		P p = new P();
+		p.m1();====Valid
+		p.m2();====InValid (Compile Time Error=cannot find symbol; symbol: method m2(); location: class P)
+		
+		C c = new C();
+		c.m1();==== Valid
+		c.m2();==== Valid
+		
+		P p1 = new C();
+		p1.m1(); ===== Valid
+		p1.m2(); ======Invalid (Compile Time Error=cannot find symbol; symbol: method m2(); location: class P)
+		
+		C c1 = new P(); =====invalid (Compile Time Error=Incompatible types, found: P, required: C)
+	}
+}
+
+1) Whatever methods parent has by default available to child.Hence, on child reference we can call both parent and child class methods.
+2) Whatever methods child class has by default not available to parent class, and hence on parent reference, we can't call child specific methods.
+3) Parent reference can be used to hold child object but using that reference we can't call child specific methods. But we can call the methods in parent class.
+4) Parent reference can be used to hold child object. But child reference cannot be used to hold parent object.
+
+A Java class cannot extend more than 1 class at a time. Hence, java won't provide support for multiple inheritance in classes.
+
+1) If our class does not extends any other class, then only our class is direct child of Object class.
+2) If our class extends any other class, then our class is not direct child of object class. The other class which is extended by our class is direct child of Object class.
+
+1) Class A {} - it is direct child of Object class.
+2) Class A extends B {}  - Oject class---->B----->A (multi level inheritance)
+
+Why Java does not support multiple inheritance?
+our class A extends B and C. B & C classes have m1() method. Now if class A calls m1() method, then which parent's class m1() method will be called?
+There is an ambiguity problem. Hence, Java does not support multiple inheritance.
+
+XXXX: Java support multiple inheritance with respect to interfaces. A interface can extends any number of interfaces simultaneously.
+
+interface A {}  
+interface B {}
+interface C extends B,C {}
+
+Why ambiguity problem won't be there in interfaces?
+interface A { method - m1()}
+interface B { method - m1()}
+interface C extends B,C {method - m1()}
+
+class X implements Interface C { method-m1() is implemented}
+
+Even though multiple methods is available in interfaces, but implementation is unique. Hence there is no chance of ambiguity problem in interfaces.
+Strictly speaking through interfaces we won't get any inheritance.
+XXXXX: Cyclic inheritance is not supported in Java, bcoz it is not needed.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+6) HAS-A relationship:
+1) it is also known as "Composition/Aggregation". 
+2) no specific keyword to implement HAS-A relationship. create a new object wherever required.
+3) Re-usability advantage.
+
+Difference between Composition & Aggregation?
+
+Composition: Assume there is an university A. In that university there are several departments. 
+In Java, University object is called container object. And University objects are called contained object.
+Now, if that university is closed, then automatically all the departments of that university will be closed.
+Here, we see that University and departments are tightly coupled to each other. One cannot exists without the other.
+This type of strongly coupled relationship is called "Composition".
+In Composition, container objects holds directly contained objects.
+
+Aggregation: In a department there are several professors.
+In Java, Department object is called container object. And Professor objects are called contained object.
+Now, if the department gets closed, then its is not necessary that all the professors of that department will be closed. They will be moved to join another department.
+Here, we see that there is no strict relationship between department objects and professors objects. They are not tightly coupled.
+This type of loosely coupled relationship is called "Aggregation".
+In Aggregation, container objects hold just references of contained objects.
+
+When we should go for IS-A & HAS-A relationship?
+If our class needs the full functionality of a parent class then we should go for Inheritance(IS-A) relationship.
+If our class needs just a part of the functionality of any other class, we should create an object of that class and call the methods of that class. (HAS-A) relationship.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+7) Method Signature:
+public static int m1(int i, float f) - here, method signature is only the method name [m1] and its arguments types[int, float].
+In Java, methods signature are kept in method table for every class.
+modifiers and return type are not method signature.
+
+8) Both methods having same name but different argument types, then those methods are said to be method overloading.
+In C language method overloading concept is not available hence, we can't declare multiple methods with same name but different argument types.
+If there is change in argument type compulsory we should go for new method name which increases complexity of programming.
+C language: abs(int i), labs(long l), fabs(float f)
+But in J
+In Java, we can declare multiple methods with same name and different argument types.
+abs(int i), abs(float f), abs(long l)
+In Method overloading, method resolution is taken care by compiler based on reference type.
+Compile time polymorphism, early-binding, Static polymorphism
+Method resolution? which method will get executed.
+
+Loop Holes:
+Case 1)
+
+Class Test1
+{
+	public void m1(int i)
+	{
+		sout("int arg");
+	}
+	
+	public void m1(float f)
+	{
+		sout("float arg");
+	}
+}
+
+class Test
+{
+	public static void main(String [] args)
+	{
+		Test t = new Test();
+		t.m1(10); ---> int arg
+		t.m1(10.5f); ---> float arg
+		t.m1('s'); ---> int arg
+	}
+}
+
+>>>>>In method overloading, compiler first check exact match of the method signature. ie method name and method argument types.
+if both matches, then it is ok.
+but if the parameter passed does not match the argument, then compiler auto-promotes(up-casting) the parameter type.
+here, char 'a' will be get auto promoted to int.
+
+Auto promotion in Java for data types:
+byte--->short---->int---->long---->float--->double
+char---->int---->long---->float--->double
+
+Case 2)
+Class Test1
+{
+	public void m1(String s)
+	{
+		sout("string version");
+	}
+	
+	public void m1(Object o)
+	{
+		sout("Object version");
+	}
+}
+
+class Test
+{
+	public static void main(String [] args)
+	{
+		Test t = new Test();
+		t.m1(new Object); ---> Object version
+		t.m1("Shankha"); ---> string version
+		t.m1(null); ---> string version
+	}
+}
+
+>>>> Here, null is a String object as well as Object. But, String is child of Object class.
+Hence, String will get the change to execute. Not need to go for parent class-Object.
+Child class will get higher priority than parent class.
+
+Case 3)
+Class Test1
+{
+	public void m1(String s)
+	{
+		sout("string version");
+	}
+	
+	public void m1(StringBuffer sb)
+	{
+		sout("stringbuffer version");
+	}
+}
+
+class Test
+{
+	public static void main(String [] args)
+	{
+		Test t = new Test();
+		t.m1(new Object); ---> string version
+		t.m1(new StringBuffer("Shankha")); ---> stringbuffer version
+		t.m1(null); ---> Compile time error
+	}
+}
+
+>>>> Here, String class and StringBuffer class, both are child of Object class. 
+Both the classes are at same level. Compiler gets confused. Ambiguity problem.
+

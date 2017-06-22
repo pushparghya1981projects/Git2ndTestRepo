@@ -1,0 +1,262 @@
+ToolsQA
+
+WebDriver Commands:
+-------------------
+
+driver.get(URL) :  This method Load a new web page in the current browser window
+driver.getTitle() : This method fetches the Title of the current page.
+driver.getCurrentUrl() : This method fetches the string representing the Current URL which is opened in the browser.
+driver.getPageSource() : This method returns the Source Code of the page.
+driver.close() : This method Close only the current window the WebDriver is currently controlling.
+driver.quit() : This method Closes all windows opened by the WebDriver.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Browser Navigation Commands:
+----------------------------
+
+driver.navigate().back() : This method does the same operation as clicking on the Back Button of any browser.
+driver.navigate().forward() : This method does the same operation as clicking on the Forward Button of any browser.
+driver.navigate().to(URL) : This method Loads a new web page in the current browser window.
+driver.navigate().refresh() :  This method Refresh the current page.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+WebElement Commands:
+--------------------
+
+WebElement.clear() :  If this element is a text entry element, this will clear the value.
+WebElement.sendKeys(CharSequence… keysToSend) : This simulate typing into an element, which may set its value.
+WebElement.click() : This simulates the clicking of any element.
+
+*********************************************************
+
+WebElement.isDisplayed( ) : boolean – This method determines if an element is currently being displayed or not.
+>>This will return true if the element is present on the page and throw a NoSuchElementFound exception if the element is not present on the page. 
+This refers the property of the element, sometimes the element is present on the page but the property of the element is set to "hidden", 
+in that case this will return false, as the element is present in the DOM but not visible to us.
+
+*********************************************************
+
+WebElement.isEnabled( ) : boolean – This determines if the element currently is Enabled or not? 
+>>This will generally return true for everything but I am sure you must have noticed many "disabled" input elements in the web pages.
+
+*********************************************************
+
+WebElement.isSelected( ) : boolean – Determine whether or not this element is selected or not.
+>>This operation only applies to input elements such as Checkboxes, Select Options and Radio Buttons. 
+This returns True if the element is currently selected or checked, false otherwise. 
+
+*********************************************************
+
+WebElement.submit( ) : void– This method works well/better than the click() if the current element is a form, or an element within a form. 
+>>If this causes the current page to change, then this method will wait until the new page is loaded.
+
+*********************************************************
+
+WebElement.getText( ) : String– This method will fetch the visible (i.e. not hidden by CSS) innerText of the element. 
+>>This returns an innerText of the element, including sub-elements, without any leading or trailing whitespace.
+
+*********************************************************
+
+WebElement.getTagName( ) : String– This method gets the tag name of this element. 
+>>This returns the tag for e.g. “input“ for the element <input name="foo"/>.
+
+*********************************************************
+
+WebElement.getCssvalue( ) : String– This method Fetch CSS property value of the give element. 
+>>Color values should be returned as rgba strings.
+So, for example if the “background-color” property is set as “green” in the HTML source, the returned value will be “rgba(0, 255, 0, 1)”.
+
+*********************************************************
+
+WebElement.getAttribute(String Name) : String– This method gets the value of the given attribute of the element. 
+>>This method returns the value of the attributes of any given element/tag.
+
+*********************************************************
+
+WebElement.getSize( ) : Dimension – This method fetch the width and height of the rendered element.
+>>This returns the size of the element on the page.
+Ex:
+WebElement element = driver.findElement(By.id("SubmitButton"));
+Dimension dimensions = element.getSize();
+System.out.println(“Height :” + dimensions.height + ”Width : "+ dimensions.width);
+
+*********************************************************
+
+getLocation( ) : Point – This method locate the location of the element on the page. 
+>>This returns the Point object, from which we can get X and Y coordinates of specific element.
+Ex:
+WebElement element = driver.findElement(By.id("SubmitButton"));
+Point point = element.getLocation();
+System.out.println("X cordinate : " + point.x + "Y cordinate: " + point.y);
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+FindElement and FindElements Command:
+-------------------------------------
+
+WebDriver gives us 'Find Element' and 'Find Elements' methods to locate element on the web page.
+'findElement' method of WebDriver returns 'WebElement'.
+findElement() method accepts something as a Parameter/Argument and which is 'By' Object. 
+'By' is the mechanism used to locate elements within a document with the help of locator value. 
+
+*********************************************************
+
+Locating Element using By Strategy:
+
+>>Locating elements in WebDriver is done by using the findElement(By.locator()) method.
+
+*********************************************************
+
+By ID : [id(String id) : By] 
+Command >> driver.findElement(By.id(“Element ID”));
+>>This is the most efficient and preferred way to locate an element, as most of the times IDs are unique.
+
+*********************************************************
+
+By Name : [name(String name) : By]
+Command >> driver.findElement(By.name(“Element NAME”));
+This is also an efficient way to locate an element.
+>>Problem is same as with ID that UI developer make it having non-unique names on a page or auto-generating the names.
+
+*********************************************************
+
+By ClassName : [className(String className) : By]
+Command >> driver.findElement(By.className(“Element CLASSNAME”));
+>>This finds elements based on the value of the CLASS attribute. If an element has many classes then this will match against each of them.
+
+*********************************************************
+
+By TagName : [tagName(String name) : By]
+Command >> driver.findElement(By.tagName(“Element TAGNAME”));
+>>With this you can find elements by their TAGNAMES.
+Locating Element By Tag Name is not too much popular because in most of cases, we will have other alternatives of element locators. 
+But yes if there is not any alternative then you can use element’s DOM Tag Name to locate that element in WebDriver.
+
+*********************************************************
+
+By LinkText : [linkText(String linkText) : By]
+Command >> driver.findElement(By.linkText(“Element LINKTEXT”));
+>> With this you can find elements of “a” tags(Link) with the link names. Use this when you know link text used within an anchor tag.
+If your targeted element is link text then you can use by link text element locator to locate that element. 
+
+*********************************************************
+
+By PartialLinkText : [partialLinkText(String linkText) : By]
+Command >> driver.findElement(By.partialLinkText(“Element LINKTEXT”));
+>> With this you can find elements of “a” tags(Link) with the partial link names.
+Partial Link Text is also same as Link text, but in this we can locate element by partial link text too. 
+In that case we need to use By.partialLinkText at place of By.linkText.
+
+*********************************************************
+
+By XPath : [xpath(String xpathexpression) : By]
+Command >> driver.findElement(By.xpath(“Element XPATHEXPRESSION”));
+>>The best thing in xpath is that it provides many different technique to locate elements. 
+It gives you feature to locate single element in many ways.
+
+*********************************************************
+
+Difference between FindElement & FindElements Commands:
+-------------------------------------------------------
+
+findElement() >> returns a WebElement object otherwise it throws an exception
+findElements() >> returns a List of WebElements, it can return an empty list if no DOM elements match the query.
+`````````````````````````````````````````````````
+findElement() :>
+On Zero Match : throws NoSuchElementException
+On One Match : returns WebElement
+On One+ Match : returns the first appearance in DOM
+``````````````````````````````````````````````````````
+findElements() :>
+
+On Zero Match : return an empty list
+On One Match : returns list of one WebElement only
+On One+ Match : returns list with all matching instance
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+DropDown & Multiple Select Operations:
+--------------------------------------
+
+To perform any action on this element we need to import ‘import org.openqa.selenium.support.ui.Select' package 
+and use it to create a new Select Object of class 'Select'.
+
+Note> Select class only works for elements with <select> tags
+
+Command >> Select oSelect = new Select(WebElement);
+
+`````````````````````````````````````````````````
+Select Commands :
+----------------
+
+selectByVisibleText : selectByVisibleText(String arg0) : void
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.selectByVisibleText(“text”);
+`````````````````````````````````````````````````
+selectByIndex : selectByIndex(int arg0) : void
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.selectByIndex(int);
+
+>>we provide the index number of the option.
+Note: Index starts from Zero
+`````````````````````````````````````````````````
+
+selectByValue : selectByValue(String arg0) : void
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.selectByValue(“text”);
+
+>>we provide the value of the option.
+`````````````````````````````````````````````````
+
+getOptions : getOptions( ) : List<WebElement>
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.getOptions();
+`````````````````````````````````````````````````
+DeSelect Methods:
+-----------------
+
+deselectAll( ) : void – Clear all selected entries. This is only valid when the SELECT supports multiple selections.
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.deselectAll;
+`````````````````````````````````````````````````
+deselectByIndex(int arg0) : void –Deselect the option at the given index.
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.deselectByIndex(3);
+`````````````````````````````````````````````````
+
+deselectByValue(String arg0) : void –Deselect all options that have a value matching the argument.
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.deselectByValue("text");
+`````````````````````````````````````````````````
+
+deselectByVisibleText(String arg0) : void – Deselect all options that display text matching the argument.
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.deselectByVisibleText("text");
+`````````````````````````````````````````````````
+
+isMultiple() : boolean – This tells whether the SELECT element support multiple selecting options at the same time or not. This accepts nothing by returns boolean value(true/false).
+
+Command >> 
+Select oSelect = new Select(WebElement);
+oSelect.isMultiple();
+`````````````````````````````````````````````````
+
+

@@ -1,0 +1,17 @@
+TOMCAT Server 7.0.32
+
+server shutdown port = 8005
+http connector port = 8080
+windows service name = Tomcat7
+roles = manager-gui
+JVM path = C:\Program Files\Java\jre1.8.0_131
+installation folder = C:\Program Files\Apache Software Foundation\Tomcat 7.0
+
+******************************************************
+Issues :
+The APR based Apache Tomcat Native library was not found on the java.library.path
+
+It means, Apache Tomcat server although started by tomcat, it not up and running.
+Solution: go to windows services and start the apache tomcat server.
+
+
